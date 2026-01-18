@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>להישאר רלבנטיות בעולם העבודה החדש – דף עבודה</title>
+
+  <style>
+    :root{
+      --plum:#651341;
+      --teal-dark:#16697A;
+      --orange:#FFA62B;
+      --paper:#fff;
+      --text:var(--teal-dark);
+      --line:rgba(22,105,122,.22);
+      --soft:rgba(237,231,227,.55);
+    }
+    *{ box-sizing:border-box; }
+
+    body{
+      margin:0;
+      background:#fff;
+      font-family:"Heebo","Assistant","Rubik",Calibri,Arial,sans-serif;
+      color:var(--text);
+      direction:rtl;
+    }
+
+    /* ===== תצוגה במסך ===== */
+    .page{
+      max-width: 900px;
+      margin: 18px auto;
+      padding: 0 12px;
+    }
+
+    .sheet{
+      background:var(--paper);
+      border:3px solid var(--plum);
+      border-radius:14px;
+      overflow:hidden;
+    }
+
+    .banner{
+      background:linear-gradient(90deg,var(--plum),var(--teal-dark));
+      color:#fff;
+      padding:16px;
+      text-align:center;
+      font-size:22px;
+      font-weight:800;
+    }
+
+    .content{ padding:18px 22px 16px; }
+    .section{ margin-top:18px; }
+
+    .section-title{
+      font-size:18px;
+      font-weight:800;
+      color:var(--plum);
+      margin:0 0 8px 0;
+    }
+
+    .adizes{
+      display:grid;
+      grid-template-columns:repeat(4,50px);
+      gap:10px;
+      justify-content:start;
+    }
+    .adizes-box{
+      width:50px;height:50px;
+      border:2px solid var(--teal-dark);
+      border-radius:10px;
+      font-size:26px;
+      font-weight:800;
+      text-transform:uppercase;
+      text-align:center;
+      outline:none;
+      background:#fff;
+      color:var(--teal-dark);
+    }
+    .adizes-box:focus{
+      border-color:var(--orange);
+      box-shadow:0 0 0 3px rgba(255,166,43,.22);
+    }
+
+    .line-input{
+      width:100%;
+      border:none;
+      border-bottom:2px solid var(--line);
+      padding:8px 4px 6px;
+      font-size:15px;
+      outline:none;
+      background:transparent;
+      margin-bottom:6px;
+      color:var(--teal-dark);
+    }
+    .line-input:focus{ border-bottom-color:var(--orange); }
+
+    .numbered{
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+    }
+    .row{
+      display:grid;
+      grid-template-columns:32px 1fr;
+      gap:8px;
+      align-items:end;
+    }
+    .num{ font-weight:800; font-size:15px; }
+
+    .insights{
+      border:2px solid var(--line);
+      border-radius:12px;
+      padding:10px;
+      background:linear-gradient(180deg,#fff 0%,var(--soft) 100%);
+    }
+
+    .footer{
+      margin-top:20px;
+      padding-top:10px;
+      border-top:1px solid rgba(22,105,122,.18);
+      text-align:center;
+      line-height:1.35;
+    }
+    .footer .name{ font-weight:900; font-size:14px; color:var(--plum); }
+    .footer .desc{ margin-top:3px; font-weight:600; font-size:12.5px; white-space:nowrap; }
+
+    /* ===== PRINT: A4 מלא ומדויק (Safari-friendly) ===== */
+    @media print{
+      /* חשוב: לא לסמוך על margin של הדפדפן */
+      @page{ size: A4; margin: 0; }
+
+      html, body{
+        width: 210mm;
+        height: 297mm;
+        margin: 0 !important;
+        padding: 0 !important;
+        background:#fff;
+      }
+
+      /* מבטלים כל “מסגרת מסך” */
+      .page{
+        max-width: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      /* הדף עצמו הוא A4 מלא */
+      .sheet{
+        width: 210mm;
+        height: 297mm;
+        border-radius: 0;
+        overflow: hidden; /* אין גלישה לעמוד 2 */
+        border: 2.5mm solid var(--plum); /* נכלל בתוך המידות */
+        background: #fff;
+      }
+
+      /* padding פנימי במקום שוליים של הדפדפן */
+      .content{
+        padding: 8mm 9mm 7mm; /* זה ה”שוליים” האמיתיים */
+      }
+
+      /* כיווץ עדין שמבטיח 100% עמוד אחד */
+      .banner{ padding: 7mm 6mm; font-size: 18px; }
+      .section{ margin-top: 7mm; }
+      .section-title{ font-size: 15px; margin-bottom: 4mm; }
+
+      .adizes{ grid-template-columns: repeat(4, 44px); gap: 8px; }
+      .adizes-box{ width:44px;height:44px;font-size:22px;border-radius:9px; }
+
+      .line-input{ padding: 4px 3px 4px; font-size: 13px; margin-bottom: 3px; border-bottom-width: 1.6px; }
+      .numbered{ gap: 4px; }
+      .row{ grid-template-columns: 28px 1fr; gap: 6px; }
+      .num{ font-size: 13px; }
+
+      .insights{ padding: 6px; border-radius: 10px; }
+
+      .footer{ margin-top: 5mm; padding-top: 3mm; }
+      .footer .name{ font-size: 12.5px; }
+      .footer .desc{ font-size: 11.5px; }
+
+      /* מניעת הדפסה של כתובות אחרי לינקים (אם יש) */
+      a[href]:after{ content:"" !important; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+    <div class="sheet">
+      <div class="banner">להישאר רלבנטיות בעולם העבודה החדש</div>
+
+      <div class="content">
+        <div class="section">
+          <div class="section-title">הפרופיל שלי לפי אדיג׳ס</div>
+          <div class="adizes" aria-label="פרופיל אדיג'ס – 4 ריבועים">
+            <input class="adizes-box" maxlength="1" aria-label="תיבה 1" />
+            <input class="adizes-box" maxlength="1" aria-label="תיבה 2" />
+            <input class="adizes-box" maxlength="1" aria-label="תיבה 3" />
+            <input class="adizes-box" maxlength="1" aria-label="תיבה 4" />
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">הכישורים שלי - נקודות חוזק</div>
+          <div class="numbered">
+            <div class="row"><div class="num">1.</div><input class="line-input" /></div>
+            <div class="row"><div class="num">2.</div><input class="line-input" /></div>
+            <div class="row"><div class="num">3.</div><input class="line-input" /></div>
+            <div class="row"><div class="num">4.</div><input class="line-input" /></div>
+            <div class="row"><div class="num">5.</div><input class="line-input" /></div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">כישורים לפיתוח</div>
+          <div class="numbered">
+            <div class="row"><div class="num">1.</div><input class="line-input" /></div>
+            <div class="row"><div class="num">2.</div><input class="line-input" /></div>
+            <div class="row"><div class="num">3.</div><input class="line-input" /></div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">תובנות מרכזיות</div>
+          <div class="insights">
+            <input class="line-input" />
+            <input class="line-input" />
+            <input class="line-input" />
+            <input class="line-input" />
+            <input class="line-input" />
+            <input class="line-input" />
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">בחודש הקרוב אשקיע בלמידה של</div>
+          <input class="line-input" />
+          <input class="line-input" />
+        </div>
+
+        <div class="footer">
+          <div class="name">סימה ביטון קצביץ</div>
+          <div class="desc">פיתוח כישורים בעולם חדש</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</body>
+</html>
